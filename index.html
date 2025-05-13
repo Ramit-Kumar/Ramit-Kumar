@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramit Kumar Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href=".\graduation-cap.png" />
+  <style>
+  body {
+  transition: background 0.6s ease, color 0.6s ease;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(-45deg, #f6d365, #fda085, #84fab0, #8fd3f4);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+header p {
+    font-size: 0.7rem;
+}
+h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #0d47a1;
+}
+p {
+  font-size: 1rem;
+  color: #555;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+.profile img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.about {
+  max-width: 800px;
+  text-align: center;
+  background: #ffffffcc;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.card {
+  background: linear-gradient(145deg, #ffffff, #e3f2fd);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.2s;
+  text-align: center;
+}
+.card:hover {
+  transform: translateY(-7px);
+}
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  color: #0d47a1;
+}
+.card a {
+  text-decoration: none;
+  color: #1565c0;
+  font-weight: bold;
+}
+footer {
+  margin-top: 50px;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0 10px;
+}
+.social-icons {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+.social-icons a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease-in-out;
+}
+.social-icons a img:hover {
+  transform: scale(1.2);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1a2a3a);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #ffffff;
+}
+body.dark-mode .about,
+body.dark-mode .card {
+  background: rgba(33, 45, 60, 0.9);
+  color: #ffffff;
+}
+body.dark-mode h1 {
+  color: #00ffd9;
+}
+body.dark-mode .card h2 {
+  color: coral;
+}
+body.dark-mode a {
+  color: #64ffda;
+}
+body.dark-mode p,
+body.dark-mode footer p {
+  color: papayawhip;
+}
+body.dark-mode #scrollToTopBtn {
+  background: #ffab00;
+  color: #1a237e;
+}
+body.dark-mode #scrollToTopBtn:hover {
+  background: #64b5f6;
+}
+
+/* Buttons and Loader */
+#scrollToTopBtn, #darkToggle {
+  position: fixed;
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+#scrollToTopBtn {
+  bottom: 40px;
+  right: 40px;
+  background: #0d47a1;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  display: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+#scrollToTopBtn:hover {
+  background: #1565c0;
+}
+#darkToggle {
+  top: 20px;
+  right: 20px;
+  padding: 8px 12px;
+  background: #ffffffaa;
+  border-radius: 8px;
+  color: #333;
+}
+#darkToggle:hover {
+  background: #ffffffdd;
+}
+
+/* Loader */
+#loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #0d47a1;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+body.loaded #loader-wrapper {
+  display: none;
+}
+
+/* Animations */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes floatShapes {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(20px); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Media Query for smaller devices */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .about {
+    font-size: 0.95rem;
+  }
+  .card h2 {
+    font-size: 1.3rem;
+  }
+  #darkToggle {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+  #scrollToTopBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+  </div>
+  <button id="darkToggle">🌚</button>
+  <header>
+    <h1>Educational Games</h1>
+    <p>Explore my educational games designed for fun learning!</p>
+  </header>
+
+  <div class="profile">
+    <img src=".\DP.jpg" alt="Ramit Kumar Mandal" />
+    <h2>Ramit Kumar Mandal</h2>
+  </div>
+
+  <div class="about">
+    <p>Hello! I'm Ramit Kumar Mandal, a passionate developer focused on building interactive educational tools that make learning fun and engaging for students. My mission is to empower learners through creative, easy-to-use web games. Explore my projects below and join the journey of learning through play!<br><br>I specialize in creating intuitive and responsive web applications that help children and beginners grasp mathematical calculations like multiplication, squares, and cubes in a playful and effective way. Through continuous improvement and feedback, I aim to make these tools more accessible, enjoyable, and impactful for all users.</p>
+  </div>
+
+  <div class="card-container">
+    <div class="card">
+      <h2>Square-Cube Game</h2>
+      <a href="https://ramit-kumar.github.io/Square_Cube_game" target="_blank">Play Now</a>
+    </div>
+    <div class="card">
+      <h2>Table Game</h2>
+      <a href="https://ramit-kumar.github.io/Table-Game" target="_blank">Play Now</a>
+    </div>
+    <div class="card">
+      <h2>Multiplication Game</h2>
+      <a href="https://ramit-kumar.github.io/Multiplication-Game" target="_blank">Play Now</a>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://github.com/ramit-kumar" target="_blank">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+    </a>
+    <a href="https://linkedin.com/in/ramit-kumar" target="_blank">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
+    </a>
+    <a href="https://twitter.com/ramit_kumar" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" />
+    </a>
+    <a href="https://instagram.com/ramit_kumar" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
+    </a>
+    <a href="https://facebook.com/ramit.kumar" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+    </a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ramit Kumar Mandal. All rights reserved.</p>
+	<p>ramit-kumar-edition</p>
+    <p>Contact: <a href="mailto:kumarramit267@gmail.com">kumarramit267@gmail.com</a></p>
+  </footer>
+  <svg style="position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; animation: floatShapes 20s ease-in-out infinite alternate;" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10%" cy="20%" r="80" fill="rgba(255,255,255,0.1)" />
+    <circle cx="90%" cy="30%" r="60" fill="rgba(255,255,255,0.15)" />
+    <circle cx="50%" cy="80%" r="100" fill="rgba(255,255,255,0.1)" />
+    <circle cx="80%" cy="60%" r="50" fill="rgba(255,255,255,0.2)" />
+  </svg>
+  <button id="scrollToTopBtn" title="Go to top">⬆️</button>
+  <script>
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+    window.onscroll = function () {
+      scrollBtn.style.display = document.documentElement.scrollTop > 100 ? "block" : "none";
+    };
+    scrollBtn.onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    const toggleBtn = document.getElementById("darkToggle");
+    toggleBtn.onclick = function () {
+      document.body.classList.toggle("dark-mode");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode") ? "🌞" : "🌚";
+    };
+      window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+  </script>
+</body>
+</html>
